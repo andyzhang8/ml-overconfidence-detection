@@ -1,0 +1,4 @@
+Evaluation Results for densenet on medical using deep_ensemble:
+ECE: 0.0095
+NLL: 0.1135
+Brier Score: 0.0362

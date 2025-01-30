@@ -1,0 +1,4 @@
+Evaluation Results for densenet on security using bayesian_nn:
+ECE: 0.0367
+NLL: 478694.7188
+Brier Score: 0.6055

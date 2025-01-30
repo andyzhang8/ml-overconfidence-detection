@@ -1,0 +1,4 @@
+Evaluation Results for resnet on financial using mc_dropout:
+ECE: 0.0047
+NLL: 0.0361
+Brier Score: 0.0093

@@ -1,0 +1,6 @@
+Evaluation Metrics for densenet on security:
+Accuracy: 0.9001
+Precision: 0.9053
+Recall: 0.9001
+F1: 0.9017
+Roc_auc: 0.8903

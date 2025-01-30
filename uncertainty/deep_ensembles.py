@@ -4,23 +4,29 @@ import torch.optim as optim
 from models.model_loader import load_model
 
 class DeepEnsemble:
-    def __init__(self, model_name, input_dim, num_classes, num_models=5, learning_rate=0.001):
-        self.models = [load_model(model_name, input_dim, num_classes) for _ in range(num_models)]
+    def __init__(self, models=None, model_name=None, input_dim=None, num_classes=None, num_models=5, learning_rate=0.001):
+        if models:
+            self.models = models 
+        else:
+            if not model_name or not input_dim or not num_classes:
+                raise ValueError("Must provide model_name, input_dim, and num_classes when initializing from scratch.")
+            self.models = [load_model(model_name, input_dim, num_classes) for _ in range(num_models)]
+
         self.optimizers = [optim.Adam(model.parameters(), lr=learning_rate) for model in self.models]
         self.criterion = nn.CrossEntropyLoss()
-        self.num_models = num_models
+        self.num_models = len(self.models)
 
-    def train(self, train_loader, epochs=10):
-        for model, optimizer in zip(self.models, self.optimizers):
+    def to(self, device):
+        for model in self.models:
+            model.to(device)
+
+    def train(self):
+        for model in self.models:
             model.train()
-            for epoch in range(epochs):
-                for inputs, labels in train_loader:
-                    inputs, labels = inputs.to("cuda"), labels.to("cuda")
-                    optimizer.zero_grad()
-                    outputs = model(inputs)
-                    loss = self.criterion(outputs, labels)
-                    loss.backward()
-                    optimizer.step()
+
+    def eval(self):
+        for model in self.models:
+            model.eval()
 
     def predict(self, x):
         with torch.no_grad():

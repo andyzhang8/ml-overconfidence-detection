@@ -1,0 +1,4 @@
+Overconfidence Predictions for resnet on financial using bayesian_nn:
+
+Sample     Pred       Confidence      Uncertainty    
+==================================================

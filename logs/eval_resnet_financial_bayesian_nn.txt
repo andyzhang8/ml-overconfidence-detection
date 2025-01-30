@@ -1,0 +1,4 @@
+Evaluation Results for resnet on financial using bayesian_nn:
+ECE: 0.0943
+NLL: 0.6616
+Brier Score: 0.4448

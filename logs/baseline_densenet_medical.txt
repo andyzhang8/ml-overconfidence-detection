@@ -1,0 +1,6 @@
+Evaluation Metrics for densenet on medical:
+Accuracy: 0.9648
+Precision: 0.9617
+Recall: 0.9648
+F1: 0.9628
+Roc_auc: 0.7537

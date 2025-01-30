@@ -1,0 +1,4 @@
+Eval Results for resnet on medical using mc_dropout:
+ECE: 0.0196
+NLL: 0.1408
+Brier Score: 0.0791

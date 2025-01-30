@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -62,6 +63,9 @@ for epoch in range(args.epochs):
 
 model.eval()
 compute_metrics(model, test_loader)
+
+
+os.makedirs(args.save_path, exist_ok=True)
 
 torch.save(model.state_dict(), f"{args.save_path}/{args.model}_{args.dataset}.pth")
 writer.close()

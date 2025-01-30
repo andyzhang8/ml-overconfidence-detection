@@ -4,7 +4,7 @@ from torch.utils.data import Dataset, random_split
 from sklearn.preprocessing import RobustScaler
 
 class MalwareDataset(Dataset):
-    def __init__(self, file_path="data/dataset_malwares.csv"):
+    def __init__(self, file_path="./datasets/dataset_malwares.csv"):
         self.data = pd.read_csv(file_path)
 
         self.data.drop(columns=["Name"], inplace=True)

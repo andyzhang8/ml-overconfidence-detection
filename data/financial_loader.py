@@ -5,14 +5,14 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from imblearn.over_sampling import SMOTE
 
 class FinancialDistressDataset(Dataset):
-    def __init__(self, file_path="data/Financial Distress.csv"):
+    def __init__(self, file_path="./datasets/fin_distress.csv"):
         self.data = pd.read_csv(file_path)
 
         self.data.drop(columns=["Company", "Time"], inplace=True)
 
         self.data["Financial Distress"] = (self.data["Financial Distress"] < -0.50).astype(int)  # 1 = distressed, 0 = healthy
 
-        encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
+        encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
         categorical_features = encoder.fit_transform(self.data[["x80"]])
         categorical_df = pd.DataFrame(categorical_features, columns=encoder.get_feature_names_out(["x80"]))
         self.data = pd.concat([self.data.drop(columns=["x80"]), categorical_df], axis=1)

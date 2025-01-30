@@ -5,15 +5,15 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 import numpy as np
 
 class StrokeDataset(Dataset):
-    def __init__(self, file_path="data/healthcare-dataset-stroke-data.csv"):
+    def __init__(self, file_path="./datasets/healthcare-dataset-stroke-data.csv"):
         self.data = pd.read_csv(file_path)
 
         self.data.drop(columns=["id"], inplace=True)
 
-        self.data["bmi"].fillna(self.data["bmi"].median(), inplace=True)
+        self.data["bmi"] = self.data["bmi"].fillna(self.data["bmi"].median())
 
         categorical_columns = ["gender", "ever_married", "work_type", "Residence_type", "smoking_status"]
-        encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
+        encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
         categorical_features = encoder.fit_transform(self.data[categorical_columns])
         categorical_df = pd.DataFrame(categorical_features, columns=encoder.get_feature_names_out(categorical_columns))
         self.data = pd.concat([self.data.drop(columns=categorical_columns), categorical_df], axis=1)
